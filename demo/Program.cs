@@ -7,8 +7,8 @@ namespace demo
     {
         static void Main()
         {
-            #region Rev..
             using AppDbContext context = new AppDbContext();
+            #region Rev..
             // CRUD
             //var Department = new List<Department>()
             //{
@@ -49,7 +49,29 @@ namespace demo
 
             //NOTE :: EF Core don't loading any navigational property
             // How to make EF core loading navigational property
-               /*   [ 1. Explicit Loading 2. Eager Loading 3. Lazy Loading ]  */
+            /*   [ 1. Explicit Loading 2. Eager Loading 3. Lazy Loading ]  */
+            #endregion
+            #region Explicit Loading
+            //var Result = context.Employees.FirstOrDefault(e => e.Id == 10);
+            //// context.Entry(Result).Reference("WorkFor").Load();
+            //// context.Entry(Result).Reference(nameof(Result.WorkFor)).Load();
+            //context.Entry(Result).Reference(e => e.WorkFor).Load();
+            //Console.WriteLine(Result?.Id ?? 0);
+            //Console.WriteLine(Result?.Name ?? "NA");
+            //Console.WriteLine(Result?.Address ?? "NA");
+            //Console.WriteLine(Result?.Salary ?? 0.0f);
+            //Console.WriteLine(Result?.DeptId ?? 0);
+            //Console.WriteLine(Result?.HiringDate ?? DateTime.Now);
+            //Console.WriteLine(Result?.WorkFor?.Name ?? "NA");
+
+
+            //var result = context.Departments.FirstOrDefault(e => e.Id == 100);
+            //context.Entry(result).Collection(d=>d.Employees).Load();
+            //Console.WriteLine(result.Name);
+            //foreach (var item in result.Employees)
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
             #endregion
         }
     }

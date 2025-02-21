@@ -8,7 +8,7 @@ namespace demo
         static void Main()
         {
             #region Rev..
-             using AppDbContext context = new AppDbContext();
+            using AppDbContext context = new AppDbContext();
             // CRUD
             //var Department = new List<Department>()
             //{
@@ -30,8 +30,26 @@ namespace demo
             //context.Employees.AddRange(Employees);
             //context.SaveChanges();
 
-            var Result = context.Employees.FirstOrDefault(e => e.Id == 10);
-            Console.WriteLine(Result.Name);
+            //var Result = context.Employees.FirstOrDefault(e => e.Id == 10);
+            //Console.WriteLine(Result?.Id??0);
+            //Console.WriteLine(Result?.Name?? "NA");
+            //Console.WriteLine(Result?.Address?? "NA");
+            //Console.WriteLine(Result?.Salary ?? 0.0f);
+            //Console.WriteLine(Result?.DeptId ?? 0);
+            //Console.WriteLine(Result?.HiringDate ?? DateTime.Now);
+            //Console.WriteLine(Result?.WorkFor?.Name?? "NA");
+
+            //var result = context.Departments.FirstOrDefault(e => e.Id == 100);
+            //Console.WriteLine(result.Name);
+            //foreach (var item in result.Employees)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+
+            //NOTE :: EF Core don't loading any navigational property
+            // How to make EF core loading navigational property
+               /*   [ 1. Explicit Loading 2. Eager Loading 3. Lazy Loading ]  */
             #endregion
         }
     }

@@ -1,4 +1,5 @@
-﻿using Castle.Components.DictionaryAdapter.Xml;
+﻿using System;
+using Castle.Components.DictionaryAdapter.Xml;
 using demo.Contexts;
 using demo.Models;
 using Microsoft.EntityFrameworkCore;
@@ -134,8 +135,12 @@ namespace demo
             //    Console.WriteLine(item);
             //}
             #endregion
-            #region MyRegion
-
+            #region Tracking Vs No Tracking
+            //var Result = context.Employees.AsNoTracking().FirstOrDefault(E=>E.Id == 10); // msh bysm3 any changes in database
+            //Console.WriteLine(context.Entry(Result).State); // Detached
+            //Result.Name = "Amr";
+            //Console.WriteLine(context.Entry(Result).State); // Detached
+            //Console.WriteLine(Result.Name); // Amr
             #endregion
         }
     }

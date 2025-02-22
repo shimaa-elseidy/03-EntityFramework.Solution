@@ -1,4 +1,5 @@
-﻿using demo.Contexts;
+﻿using Castle.Components.DictionaryAdapter.Xml;
+using demo.Contexts;
 using demo.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -116,6 +117,21 @@ namespace demo
             //foreach (var item in result.Employees)
             //{
             //    Console.WriteLine(item.Name);
+            //}
+            #endregion
+            #region Join Operators
+            // Join Operators - Join 
+            // fluent syntax
+            //var result = context.Employees.Join(context.Departments, E => E.DeptId, D => D.Id , (E,D) => new { EmpId = E.Id , EmpName = E.Name ,DeptId = D.Id , DeptName = D.Name });
+            // query syntax
+            //var result = from E in context.Employees
+            //             join D in context.Departments
+            //             on E.Id equals D.Id
+            //             where D.Name == "HR"
+            //             select new { EmpId = E.Id, EmpName = E.Name, DeptId = D.Id, DeptName = D.Name };
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item);
             //}
             #endregion
             #region MyRegion

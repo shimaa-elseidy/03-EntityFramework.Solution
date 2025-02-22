@@ -1,5 +1,6 @@
 ﻿using demo.Contexts;
 using demo.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace demo
 {
@@ -51,7 +52,7 @@ namespace demo
             // How to make EF core loading navigational property
             /*   [ 1. Explicit Loading 2. Eager Loading 3. Lazy Loading ]  */
             #endregion
-            #region Explicit Loading
+            #region Explicit Loading [Reference("").Load()]
             //var Result = context.Employees.FirstOrDefault(e => e.Id == 10);
             //// context.Entry(Result).Reference("WorkFor").Load();
             //// context.Entry(Result).Reference(nameof(Result.WorkFor)).Load();
@@ -72,6 +73,53 @@ namespace demo
             //{
             //    Console.WriteLine(item.Name);
             //}
+            #endregion
+            #region Eager Loading [ include() ]
+            //var Result = context.Employees.Include(E=>E.WorkFor).FirstOrDefault(e => e.Id == 10);
+
+
+            //Console.WriteLine(Result?.Id ?? 0);
+            //Console.WriteLine(Result?.Name ?? "NA");
+            //Console.WriteLine(Result?.Address ?? "NA");
+            //Console.WriteLine(Result?.Salary ?? 0.0f);
+            //Console.WriteLine(Result?.DeptId ?? 0);
+            //Console.WriteLine(Result?.HiringDate ?? DateTime.Now);
+            //Console.WriteLine(Result?.WorkFor?.Name ?? "NA");
+
+
+            //var result = context.Departments.Include(E => E.Employees).FirstOrDefault(e => e.Id == 100);
+            ////Console.WriteLine(result.Name);
+            //foreach (var item in result.Employees)
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
+            #endregion
+            #region Lazy Loading
+            // Install Package Proxies
+            // Update OnConfiguring() - UseLazyLoadingProxies()
+            // Make all entities public
+            // Make all navigatipnal properties
+
+
+            //var Result = context.Employees.FirstOrDefault(e => e.Id == 10);
+            //Console.WriteLine(Result?.Id ?? 0);
+            //Console.WriteLine(Result?.Name ?? "NA");
+            //Console.WriteLine(Result?.Address ?? "NA");
+            //Console.WriteLine(Result?.Salary ?? 0.0f);
+            //Console.WriteLine(Result?.DeptId ?? 0);
+            //Console.WriteLine(Result?.HiringDate ?? DateTime.Now);
+            //Console.WriteLine(Result?.WorkFor?.Name ?? "NA");
+
+
+            //var result = context.Departments.FirstOrDefault(e => e.Id == 100);
+            ////Console.WriteLine(result.Name);
+            //foreach (var item in result.Employees)
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
+            #endregion
+            #region MyRegion
+
             #endregion
         }
     }

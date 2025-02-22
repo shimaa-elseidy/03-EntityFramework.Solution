@@ -20,7 +20,8 @@ namespace demo.Contexts
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = Shimaa123 ; Database = DB02 ; Trusted_Connection = True ; TrustServerCertificate=True");
+            //optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server = Shimaa123 ; Database = DB02 ; Trusted_Connection = True ; TrustServerCertificate=True");
         }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }

@@ -142,6 +142,22 @@ namespace demo
             //Console.WriteLine(context.Entry(Result).State); // Detached
             //Console.WriteLine(Result.Name); // Amr
             #endregion
+            #region Remote Vs Local
+            // Remotely
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            // Local ==> to reduce num of requests
+            //context.Employees.Load();
+            //context.Employees.Local.Any();
+            #endregion
         }
     }
 }

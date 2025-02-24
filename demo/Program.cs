@@ -1,5 +1,8 @@
-﻿using demo.Contexts;
+﻿using System;
+using Castle.Components.DictionaryAdapter.Xml;
+using demo.Contexts;
 using demo.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace demo
 {
@@ -7,8 +10,8 @@ namespace demo
     {
         static void Main()
         {
+            using AppDbContext context = new AppDbContext();
             #region Rev..
-             using AppDbContext context = new AppDbContext();
             // CRUD
             //var Department = new List<Department>()
             //{
@@ -30,8 +33,130 @@ namespace demo
             //context.Employees.AddRange(Employees);
             //context.SaveChanges();
 
-            var Result = context.Employees.FirstOrDefault(e => e.Id == 10);
-            Console.WriteLine(Result.Name);
+            //var Result = context.Employees.FirstOrDefault(e => e.Id == 10);
+            //Console.WriteLine(Result?.Id??0);
+            //Console.WriteLine(Result?.Name?? "NA");
+            //Console.WriteLine(Result?.Address?? "NA");
+            //Console.WriteLine(Result?.Salary ?? 0.0f);
+            //Console.WriteLine(Result?.DeptId ?? 0);
+            //Console.WriteLine(Result?.HiringDate ?? DateTime.Now);
+            //Console.WriteLine(Result?.WorkFor?.Name?? "NA");
+
+            //var result = context.Departments.FirstOrDefault(e => e.Id == 100);
+            //Console.WriteLine(result.Name);
+            //foreach (var item in result.Employees)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+
+            //NOTE :: EF Core don't loading any navigational property
+            // How to make EF core loading navigational property
+            /*   [ 1. Explicit Loading 2. Eager Loading 3. Lazy Loading ]  */
+            #endregion
+            #region Explicit Loading [Reference("").Load()]
+            //var Result = context.Employees.FirstOrDefault(e => e.Id == 10);
+            //// context.Entry(Result).Reference("WorkFor").Load();
+            //// context.Entry(Result).Reference(nameof(Result.WorkFor)).Load();
+            //context.Entry(Result).Reference(e => e.WorkFor).Load();
+            //Console.WriteLine(Result?.Id ?? 0);
+            //Console.WriteLine(Result?.Name ?? "NA");
+            //Console.WriteLine(Result?.Address ?? "NA");
+            //Console.WriteLine(Result?.Salary ?? 0.0f);
+            //Console.WriteLine(Result?.DeptId ?? 0);
+            //Console.WriteLine(Result?.HiringDate ?? DateTime.Now);
+            //Console.WriteLine(Result?.WorkFor?.Name ?? "NA");
+
+
+            //var result = context.Departments.FirstOrDefault(e => e.Id == 100);
+            //context.Entry(result).Collection(d=>d.Employees).Load();
+            //Console.WriteLine(result.Name);
+            //foreach (var item in result.Employees)
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
+            #endregion
+            #region Eager Loading [ include() ]
+            //var Result = context.Employees.Include(E=>E.WorkFor).FirstOrDefault(e => e.Id == 10);
+
+
+            //Console.WriteLine(Result?.Id ?? 0);
+            //Console.WriteLine(Result?.Name ?? "NA");
+            //Console.WriteLine(Result?.Address ?? "NA");
+            //Console.WriteLine(Result?.Salary ?? 0.0f);
+            //Console.WriteLine(Result?.DeptId ?? 0);
+            //Console.WriteLine(Result?.HiringDate ?? DateTime.Now);
+            //Console.WriteLine(Result?.WorkFor?.Name ?? "NA");
+
+
+            //var result = context.Departments.Include(E => E.Employees).FirstOrDefault(e => e.Id == 100);
+            ////Console.WriteLine(result.Name);
+            //foreach (var item in result.Employees)
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
+            #endregion
+            #region Lazy Loading
+            // Install Package Proxies
+            // Update OnConfiguring() - UseLazyLoadingProxies()
+            // Make all entities public
+            // Make all navigatipnal properties
+
+
+            //var Result = context.Employees.FirstOrDefault(e => e.Id == 10);
+            //Console.WriteLine(Result?.Id ?? 0);
+            //Console.WriteLine(Result?.Name ?? "NA");
+            //Console.WriteLine(Result?.Address ?? "NA");
+            //Console.WriteLine(Result?.Salary ?? 0.0f);
+            //Console.WriteLine(Result?.DeptId ?? 0);
+            //Console.WriteLine(Result?.HiringDate ?? DateTime.Now);
+            //Console.WriteLine(Result?.WorkFor?.Name ?? "NA");
+
+
+            //var result = context.Departments.FirstOrDefault(e => e.Id == 100);
+            ////Console.WriteLine(result.Name);
+            //foreach (var item in result.Employees)
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
+            #endregion
+            #region Join Operators
+            // Join Operators - Join 
+            // fluent syntax
+            //var result = context.Employees.Join(context.Departments, E => E.DeptId, D => D.Id , (E,D) => new { EmpId = E.Id , EmpName = E.Name ,DeptId = D.Id , DeptName = D.Name });
+            // query syntax
+            //var result = from E in context.Employees
+            //             join D in context.Departments
+            //             on E.Id equals D.Id
+            //             where D.Name == "HR"
+            //             select new { EmpId = E.Id, EmpName = E.Name, DeptId = D.Id, DeptName = D.Name };
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+            #region Tracking Vs No Tracking
+            //var Result = context.Employees.AsNoTracking().FirstOrDefault(E=>E.Id == 10); // msh bysm3 any changes in database
+            //Console.WriteLine(context.Entry(Result).State); // Detached
+            //Result.Name = "Amr";
+            //Console.WriteLine(context.Entry(Result).State); // Detached
+            //Console.WriteLine(Result.Name); // Amr
+            #endregion
+            #region Remote Vs Local
+            // Remotely
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            //context.Employees.Any();
+            // Local ==> to reduce num of requests
+            //context.Employees.Load();
+            //context.Employees.Local.Any();
             #endregion
         }
     }

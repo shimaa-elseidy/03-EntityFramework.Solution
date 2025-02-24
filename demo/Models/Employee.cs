@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace demo.Models
 {
-    internal class Employee
+    public class Employee
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,6 +15,6 @@ namespace demo.Models
         public string Address { get; set; }
         public DateTime HiringDate { get; set; } = DateTime.UtcNow;
         public int DeptId { get; set; }
-        public Department WorkFor { get; set; }
+        public virtual Department WorkFor { get; set; }
     }
 }
